@@ -1,8 +1,61 @@
 <!DOCTYPE html>
 <head>
-    <title>We Mars</title>
+    <title style="display: none">We Mars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type ="text/css" href="style.css" />
 </head>
-<body>
-    <p>Hello world</p>
+<body style="width: 100%; flex-direction:column;">
+    <header>
+        <nav>
+            <!--The class collapsible sets up a dropdown menu
+                The script on this page sets up the last child
+                in the collapsible class as the dropdown menu
+                and will open the menu whenever the 
+                'collapsible' div is moused over
+                This means there must be a 'menucontent'
+                div, as the script expects it, even if it is
+                blank. The general format is:
+                <div class=collapsible>
+                    <a>(some title)</a>
+                    <div class=menucontext>
+                        <div class=dropdown>(an option)</div>
+                    </div>
+                </div>-->
+            <div class="collapsible">
+                <a href="/">WELCOME</a>
+                <div class="menucontent">
+                    <div class="dropdown">Example option</div>
+                </div>
+            </div>
+            <div class="collapsible">
+                <a href="/about">ABOUT </a>
+                <div class="menucontent">
+                </div>
+            </div>
+            <div class="collapsible">
+                <a href="/rover">ROVER </a>
+                <div class="menucontent"></div>
+            </div>
+        </nav>
+    </header>
+    <div>BODY</div>
+    <footer>
+        
+    </footer>
+    
 </body>
+
+<script style="display: none;">
+    var menus = document.getElementsByClassName("collapsible");
+    for(i = 0; i < menus.length; i++){
+        menus[i].addEventListener("mouseover", function() {
+            var content = this.lastElementChild;
+            content.style.display = "inline-block";
+            content.style.maxHeight = (content.scrollHeight*2) + "px";
+        });
+        menus[i].addEventListener("mouseout", function() {
+            var content = this.lastElementChild;
+            content.style.maxHeight = null;
+        });
+    }
+</script>
