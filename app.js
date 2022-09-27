@@ -4,7 +4,7 @@ const path = require("path");
 var app = express();
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "source/public"), {index: false}));
+app.use(express.static(path.join(__dirname, "/source/public"), {index: false}));
 
 const port = 3000;
 const public_ref = path.join(__dirname, "/source/public");

@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type ="text/css" href="style.css" />
 </head>
-<body style="width: 100%; flex-direction:column;">
+<body style="width: 100%; align-content:center">
     <header>
-        <nav>
+        <nav id="topnav" class="menu">
             <!--The class collapsible sets up a dropdown menu
                 The script on this page sets up the last child
                 in the collapsible class as the dropdown menu
@@ -26,10 +26,17 @@
                 <div class="menucontent">
                     <div class="dropdown">Example option</div>
                 </div>
+                <div class="menucontent">
+                    <div class="dropdown">Example option 2</div>
+                </div>
             </div>
             <div class="collapsible">
                 <a href="/about">ABOUT </a>
                 <div class="menucontent">
+                    <div class="dropdown">Example option</div>
+                </div>
+                <div class="menucontent">
+                    <div class="dropdown">Example option 2</div>
                 </div>
             </div>
             <div class="collapsible">
@@ -38,24 +45,105 @@
             </div>
         </nav>
     </header>
-    <div>BODY</div>
+    <div class="img">
+        <img src="/WEmars Logo.png"/>
+    </div>
+    <div style="height:50vw;" class="alignV">
+        <h1 style="padding-top:2rem; padding-bottom:2rem;">Welcome</h1>
+        <div style="max-width:70%; align-self:center">
+            Western Engineering's Mars Rover team aims, as an organization,
+            to inspire our members and members of the public to become more 
+            involved in science and technology through robotics
+        </div>
+    </div>
     <footer>
-        
+        <div id="credit">
+            <div style="all:inherit;">Build by WE Mars Members</div>
+            <div style="all:inherit;">Powered by blood, sweat, and tears</div>
+        </div>
     </footer>
     
 </body>
 
 <script style="display: none;">
+    //dropMenu is added into the navbar to accomidate narrow
+    //screens
+    var dropMenu = "<div class='dropMenu'><div id='dropButton'>MENU</div>";
+    var navbar = document.getElementById("topnav");
+    var navbarContent = navbar.innerHTML;
+
+    function checkWidth(){
+        //checkWidth is used to dynamically adjust top bar
+        // with screen size
+        
+        console.log("checking width");
+        if(innerWidth < navbar.scrollWidth){
+            console.log("topbar too big. Screen = " + innerWidth + ", topbar = " + navbar.scrollWidth);
+            navbar.innerHTML = dropMenu + navbarContent + "</div>";
+            var menuIcon = document.getElementsByClassName("dropMenu")[0];
+            var menuChildren = menuIcon.children;
+            for(i = 1; i < menuChildren.length; i++){
+                menuChildren[i].style.display = "none";
+            }
+            menuIcon.addEventListener("click", function(){
+                if(menuChildren[1].style.display != "inline-flex"){
+                    for(i = 1; i < menuChildren.length; i++){
+                        menuChildren[i].style.display = "inline-flex";
+                    }
+                    setCollapsibles("all");
+                } else {
+                    for(i = 1; i < menuChildren.length; i++){
+                        menuChildren[i].style.display = "none";
+                    }
+                    setCollapsibles("all");
+                }
+            });
+        } else {
+            navbar.innerHTML = navbarContent;
+            if(innerWidth>navbar.scrollWidth){
+                console.log("Enough space, reverting to standard view...");
+                setCollapsibles();
+            } else {
+                checkWidth();
+            }
+        }
+    }
+
+    onload = ()=>{
+        checkWidth();
+    };
+    onresize = ()=>{
+        checkWidth();
+    };
+
+function setCollapsibles(expansion){
     var menus = document.getElementsByClassName("collapsible");
     for(i = 0; i < menus.length; i++){
-        menus[i].addEventListener("mouseover", function() {
-            var content = this.lastElementChild;
-            content.style.display = "inline-block";
-            content.style.maxHeight = (content.scrollHeight*2) + "px";
-        });
-        menus[i].addEventListener("mouseout", function() {
-            var content = this.lastElementChild;
-            content.style.maxHeight = null;
-        });
+        if(!expansion){
+            menus[i].addEventListener("mouseover", function() {
+                var content = this.children;
+                for(c = 1; c < content.length; c++){
+                    content[c].style.display = "inline-block";
+                    content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
+                }
+            });
+            menus[i].addEventListener("mouseout", function() {
+                var content = this.children;
+                for(c = 1; c < content.length; c++){
+                    content[c].style.maxHeight = null;    
+                }
+            });
+            /*  The for loop in each listener is to get each
+                child object below the header for the menu,
+                rather than just the first.                 */
+        }else if(expansion == "all"){
+            var content = menus[i].children;
+            for(c = 1; c < content.length; c++){
+                content[c].style.display = "inline-block";
+                content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
+            }
+        }
     }
+    
+}
 </script>
