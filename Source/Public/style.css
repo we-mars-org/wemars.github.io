@@ -1,6 +1,4 @@
 * {
-    /*Main mode - this doesn't work for most sections, so usually you
-    need a custom one*/
     background: white;
     display: flex;
     justify-content: center;
@@ -10,7 +8,6 @@
 }
 
 header{
-    /*This is the main wrapper for the header*/
     background: black;
     color: grey;
     width: 100%;
@@ -21,7 +18,6 @@ header{
 }
 
 nav{
-    /*The inherits are so heade properties*/
     background: inherit;
     color: inherit;
     font-size: inherit;
@@ -37,15 +33,13 @@ a, .a{
     padding: 1.05rem;
     /* Height and padding must equal header height
     for dropdown menu to not push main link around
-    
-    These links are used for the headers. USE A DIV for anything else*/
+    */
 }
 
 body{
     display:inline-flex;
     flex-direction: column;
     align-items:center;
-    /*To align body elements vertically*/
 }
 
 footer {
@@ -58,7 +52,6 @@ footer {
 }
 
 .menucontent {
-    /*group of links underneath each drop-down menu*/
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -70,7 +63,6 @@ footer {
 }
 
 .dropdown {
-    /*each sub-option in the drop menu*/
     color: inherit;
     background: inherit;
     padding: 0.3rem;
@@ -79,7 +71,6 @@ footer {
 }
 
 .collapsible{
-    /*For each mouse-over dropdown menu to bundle it all together*/
     display: inline-flex;
     flex-direction:column;
     padding: 0;
@@ -93,7 +84,6 @@ footer {
 }
 
 .dropMenu{
-    /*The mobile-friendly drop menu calss*/
     min-height: 1.5rem;
     background:black;
     color:grey;
@@ -104,7 +94,6 @@ footer {
 }
 
 #dropButton{
-    /*For the button in the mobile dropdown menu*/
     background:inherit;
     border: 0.1rem solid grey;
     padding: 0.4rem;
@@ -116,7 +105,6 @@ footer {
 }
 
 img, .img {
-    /*Align images*/
     width: 50rem;
     align-content:center;
     align-self:center;
@@ -136,7 +124,6 @@ img, .img {
 }
 
 #credit{
-    /*For the credit at the bottom of the footer*/
     background-color: black;
     color: grey;
     padding: 2rem;
