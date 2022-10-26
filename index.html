@@ -98,8 +98,8 @@
                     setCollapsibles("all");
                 }
             });
-        } else if (!navbar){
-            
+        } else if (navbar == null){
+
         }else {
             navbar.innerHTML = navbarContent;
             if(innerWidth>navbar.scrollWidth){
