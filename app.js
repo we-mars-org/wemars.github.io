@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, "/source/public"), {index: false}));
 //This function displays the static files in /source/public, such as the CSS and HTML files
 
 const port = 3000;
-const public_ref = path.join(__dirname, "/source/public");
+const public_ref = path.join(__dirname, "/");
 //This is a shorthand to quickly refer to the public directory in source/public
 
 app.get('/', (req, res) => {
