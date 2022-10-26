@@ -13,7 +13,7 @@ const public_ref = path.join(__dirname, "/source/public");
 
 app.get('/', (req, res) => {
   // Main page - Fetches the homepage
-  res.sendFile(path.join(public_ref, "/homepage.html"))
+  res.sendFile(path.join(public_ref, "/index.html"))
   console.log('get request made \t' + log_time());
 })
 
