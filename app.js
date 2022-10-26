@@ -4,7 +4,7 @@ const path = require("path");
 var app = express();
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "/source/public"), {index: false}));
+app.use(express.static(path.join(__dirname, "/"), {index: false}));
 //This function displays the static files in /source/public, such as the CSS and HTML files
 
 const port = 3000;
