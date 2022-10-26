@@ -98,7 +98,9 @@
                     setCollapsibles("all");
                 }
             });
-        } else {
+        } else if (!navbar){
+            
+        }else {
             navbar.innerHTML = navbarContent;
             if(innerWidth>navbar.scrollWidth){
                 console.log("Enough space, reverting to standard view...");
