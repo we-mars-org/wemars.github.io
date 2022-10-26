@@ -77,7 +77,6 @@
         //checkWidth is used to dynamically adjust top bar
         // with screen size
         
-        console.log("checking width");
         if(innerWidth < navbar.scrollWidth){
             console.log("topbar too big. Screen = " + innerWidth + ", topbar = " + navbar.scrollWidth);
             navbar.innerHTML = dropMenu + navbarContent + "</div>";
