@@ -1,0 +1,22 @@
+{
+  "name": "we-mars",
+  "version": "1.0.0",
+  "description": "The source code for wemars.org",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DominicGuerra/WE-Mars.git"
+  },
+  "author": "Dominic Guerra",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/DominicGuerra/WE-Mars/issues"
+  },
+  "homepage": "https://github.com/DominicGuerra/WE-Mars#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
