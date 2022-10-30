@@ -5,48 +5,11 @@
     <link rel="icon" href="WEmars Favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type ="text/css" href="style.css" />
+    <script src="/jquery-3.6.1.min.js"></script>
 </head>
 <body style="width: 100%; align-content:center">
-    <header>
-        <nav id="topnav" class="menu">
-            <!--The class collapsible sets up a dropdown menu
-                The script on this page sets up the last child
-                in the collapsible class as the dropdown menu
-                and will open the menu whenever the 
-                'collapsible' div is moused over
-                This means there must be a 'menucontent'
-                div, as the script expects it, even if it is
-                blank. The general format is:
-                <div class=collapsible>
-                    <a>(some title)</a>
-                    <div class=menucontext>
-                        <div class=dropdown>(an option)</div>
-                    </div>
-                </div>-->
-            <div class="collapsible">
-                <a href="/">WELCOME</a>
-                <div class="menucontent">
-                    <div class="dropdown">Example option</div>
-                </div>
-                <div class="menucontent">
-                    <div class="dropdown">Example option 2</div>
-                </div>
-            </div>
-            <div class="collapsible">
-                <a href="/about">ABOUT </a>
-                <div class="menucontent">
-                    <div class="dropdown">Example option</div>
-                </div>
-                <div class="menucontent">
-                    <div class="dropdown">Example option 2</div>
-                </div>
-            </div>
-            <div class="collapsible">
-                <a href="/rover">ROVER </a>
-                <div class="menucontent"></div>
-            </div>
-        </nav>
-    </header>
+    <div id="header" style="width:100%"></div>
+    <!--This div is just a target for the jQuery header load-->
     <div class="img">
         <img src="WEmars Logo.png"/>
     </div>
@@ -58,95 +21,15 @@
             involved in science and technology through robotics
         </div>
     </div>
-    <footer>
-        <div id="credit">
-            <div style="all:inherit;">Build by WE Mars Members</div>
-            <div style="all:inherit;">Powered by blood, sweat, and tears</div>
-        </div>
+    <footer id="footer">
     </footer>
     
 </body>
 
-<script style="display: none;">
-    //dropMenu is added into the navbar to accomidate narrow
-    //screens
-    var dropMenu = "<div class='dropMenu'><div id='dropButton'>MENU</div>";
-    var navbar = document.getElementById("topnav");
-    var navbarContent = navbar.innerHTML;
 
-    function checkWidth(){
-        //checkWidth is used to dynamically adjust top bar
-        // with screen size
-        
-        if(innerWidth < navbar.scrollWidth){
-            console.log("topbar too big. Screen = " + innerWidth + ", topbar = " + navbar.scrollWidth);
-            navbar.innerHTML = dropMenu + navbarContent + "</div>";
-            var menuIcon = document.getElementsByClassName("dropMenu")[0];
-            var menuChildren = menuIcon.children;
-            for(i = 1; i < menuChildren.length; i++){
-                menuChildren[i].style.display = "none";
-            }
-            menuIcon.addEventListener("click", function(){
-                if(menuChildren[1].style.display != "inline-flex"){
-                    for(i = 1; i < menuChildren.length; i++){
-                        menuChildren[i].style.display = "inline-flex";
-                    }
-                    setCollapsibles("all");
-                } else {
-                    for(i = 1; i < menuChildren.length; i++){
-                        menuChildren[i].style.display = "none";
-                    }
-                    setCollapsibles("all");
-                }
-            });
-        } else if (navbar == null){
-
-        }else {
-            navbar.innerHTML = navbarContent;
-            if(innerWidth>navbar.scrollWidth){
-                console.log("Enough space, reverting to standard view...");
-                setCollapsibles();
-            } else {
-                checkWidth();
-            }
-        }
-    }
-
-    onload = ()=>{
-        checkWidth();
-    };
-    onresize = ()=>{
-        checkWidth();
-    };
-
-function setCollapsibles(expansion){
-    var menus = document.getElementsByClassName("collapsible");
-    for(i = 0; i < menus.length; i++){
-        if(!expansion){
-            menus[i].addEventListener("mouseover", function() {
-                var content = this.children;
-                for(c = 1; c < content.length; c++){
-                    content[c].style.display = "inline-block";
-                    content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
-                }
-            });
-            menus[i].addEventListener("mouseout", function() {
-                var content = this.children;
-                for(c = 1; c < content.length; c++){
-                    content[c].style.maxHeight = null;    
-                }
-            });
-            /*  The for loop in each listener is to get each
-                child object below the header for the menu,
-                rather than just the first.                 */
-        }else if(expansion == "all"){
-            var content = menus[i].children;
-            for(c = 1; c < content.length; c++){
-                content[c].style.display = "inline-block";
-                content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
-            }
-        }
-    }
-    
-}
+<script style="display:none;">
+    $('#header').load("header.html");
+    $('#footer').load("footer.html");
+    /*This is a jQuery call to load in the header, which was the easiest
+    method for importing the header file*/
 </script>
