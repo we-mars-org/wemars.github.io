@@ -1,0 +1,123 @@
+<!--This file holds the header for the website
+To import into any given html file, use
+    <object data="header.html" style="width:100vw"></object>
+and the header should be found. You may also need to tell the
+body to have width: 100% to ensure it fills the screen-->
+<head>
+    <link rel="stylesheet" type ="text/css" href="style.css" />
+    <script src="/jquery-3.6.1.min.js"></script>
+</head>
+<header style="width:100%">
+    <nav id="topnav" class="menu">
+        <div class="submenu" style="z-index:10;">
+            <a href="/">WELCOME</a>
+            <div class="suboptionwrapper" style="z-index:10;">
+                <div class="suboption" style="z-index:10;">Example option</div>
+            </div>
+            <div class="suboptionwrapper">
+                <div class="suboption">Example option 2</div>
+            </div>
+        </div>
+        <div class="submenu">
+            <a href="/about">ABOUT </a>
+            <div class="suboptionwrapper">
+                <div class="suboption">Example option</div>
+            </div>
+            <div class="suboptionwrapper">
+                <div class="suboption">Example option 2</div>
+            </div>
+        </div>
+        <div class="submenu">
+            <a href="/rover">ROVER </a>
+            <div class="suboptionwrapper"></div>
+        </div>
+    </nav>
+</header>
+
+
+<script style="display: none;">
+    //dropMenu is added into the navbar to accomidate narrow
+    //screens
+    var dropMenu = "<div class='dropMenu'><div id='dropButton'>MENU</div>";
+    var navbar = document.getElementById("topnav");
+    var navbarContent = navbar.innerHTML;
+
+    function checkWidth(){
+        //checkWidth is used to dynamically adjust top bar
+        // with screen size
+        console.log("checking width...");
+        if(innerWidth < navbar.scrollWidth){
+            console.log("topbar too big. Screen = " + innerWidth + ", topbar = " + navbar.scrollWidth);
+            navbar.innerHTML = dropMenu + navbarContent + "</div>";
+            var menuIcon = document.getElementsByClassName("dropMenu")[0];
+            var menuChildren = menuIcon.children;
+            for(i = 1; i < menuChildren.length; i++){
+                menuChildren[i].style.display = "none";
+            }
+            menuIcon.addEventListener("click", function(){
+                if(menuChildren[1].style.display != "inline-flex"){
+                    for(i = 1; i < menuChildren.length; i++){
+                        menuChildren[i].style.display = "inline-flex";
+                    }
+                    setsubmenus("all");
+                } else {
+                    for(i = 1; i < menuChildren.length; i++){
+                        menuChildren[i].style.display = "none";
+                    }
+                    setsubmenus("all");
+                }
+            });
+        } else if (navbar == null){
+
+        }else {
+            navbar.innerHTML = navbarContent;
+            if(innerWidth>navbar.scrollWidth){
+                console.log("Enough space, reverting to standard view...");
+                setsubmenus();
+            } else {
+                checkWidth();
+            }
+        }
+    }
+    onload = ()=>{
+        checkWidth();
+    };
+    onresize = ()=>{
+        checkWidth();
+    };
+
+function setsubmenus(expansion){
+    var menus = document.getElementsByClassName("submenu");
+    for(i = 0; i < menus.length; i++){
+        if(!expansion){
+            menus[i].addEventListener("mouseover", function() {
+                var content = this.children;
+                for(c = 1; c < content.length; c++){
+                    content[c].style.display = "inline-block";
+                    content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
+                }
+            });
+            menus[i].addEventListener("mouseout", function() {
+                var content = this.children;
+                for(c = 1; c < content.length; c++){
+                    content[c].style.maxHeight = null;    
+                }
+            });
+            /*  The for loop in each listener is to get each
+                child object below the header for the menu,
+                rather than just the first.                 */
+        }else if(expansion == "all"){
+            var content = menus[i].children;
+            for(c = 1; c < content.length; c++){
+                content[c].style.display = "inline-block";
+                content[c].style.maxHeight = (content[c].scrollHeight*2) + "px";
+            }
+        }
+    }
+    
+}
+$(window).load(checkWidth());
+/*This bit of jQuery needs to be in here to run the width check
+when the header loads*/
+
+</script>
